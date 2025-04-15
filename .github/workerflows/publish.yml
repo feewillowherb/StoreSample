@@ -1,0 +1,70 @@
+name: Docker Release
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: ["main", "release"]
+    # Publish semver tags as releases.
+    tags: ["v*.*.*"]
+
+env:
+  # Use docker.io for Docker Hub if empty
+  DOCKER_REGISTRY: feewillowherb/default/
+  TAG: :${{ github.ref_name }}
+
+jobs:
+  build:
+    runs-on: ARM64
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      # skip install and cache since we are using self-hosted runner with pre-installed dotnet
+      # - uses: actions/setup-dotnet@v3
+      #   with:
+      #     global-json-file: global.json
+      # - uses: actions/cache@v3
+      #   with:
+      #     path: ~/.nuget/packages
+      #     # Look to see if there is a cache hit for the corresponding requirements file
+      #     key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-nuget
+      - name: Run dotnet restore
+        run: dotnet restore
+      - name: Run dotnet publish
+        run: |
+          export DOTNET_ROOT=$HOME/.dotnet
+          export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+          ./publish_dockerfolders.sh
+
+      - name: Run Docker compose build
+        run: |
+          docker compose build
+          docker images
+
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v3 # More information on this action can be found below in the 'AWS Credentials' section
+      #   with:
+      #     aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ap-east-1
+
+      # - name: Login to Amazon ECR
+      #   id: login-ecr
+      #   uses: aws-actions/amazon-ecr-login@v1
+      #   with:
+      #     mask-password: 'true'
+      - name: publish
+        run: |
+          docker compose push

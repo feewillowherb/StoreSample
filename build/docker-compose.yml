@@ -1,0 +1,14 @@
+version: '3.8'
+name: store-sample
+services:
+  storesampleapi:
+    container_name: store-sample-api
+    image: ${DOCKER_REGISTRY-}storesampleapi
+    build:
+      context: ../
+      dockerfile: ./src/StoreSample.HttpApi.Host/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "12380:80"

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\StoreSample.Domain.Shared\StoreSample.Domain.Shared.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit"/>
+    <PackageReference Include="MassTransit.EntityFrameworkCore" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
+    <PackageReference Include="Vogen"/>
+    <PackageReference Include="Volo.Abp.Emailing"/>
+    <PackageReference Include="Volo.Abp.Caching"/>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity"/>
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"/>
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain"/>
+    <PackageReference Include="Volo.Abp.Identity.Domain"/>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\StoreSample.Domain\StoreSample.Domain.csproj"/>
+    <ProjectReference Include="..\StoreSample.EntityFrameworkCore.Tests\StoreSample.EntityFrameworkCore.Tests.csproj"/>
+    <ProjectReference Include="..\StoreSample.TestBase\StoreSample.TestBase.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.TestFramework" />
+    <PackageReference Include="Reqnroll.NUnit"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.AspNetCore" />
+  </ItemGroup>
+
+</Project>

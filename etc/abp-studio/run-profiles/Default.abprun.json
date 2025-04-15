@@ -1,0 +1,15 @@
+﻿{
+  "applications": {
+    "StoreSample.HttpApi.Host": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44338",
+      "path": "../../../src/StoreSample.HttpApi.Host/StoreSample.HttpApi.Host.csproj",
+      "kubernetesService": ".*-httpapihost$",
+      "healthCheckEndpoint": "/health-status",
+      "healthUiEndpoint": "/health-ui",
+      "execution": {
+        "order": 4
+      }
+    }
+  }
+}

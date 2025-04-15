@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'StoreSample.HttpApi.Host' "/>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI"/>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client"/>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory"/>
+    <PackageReference Include="OpenTelemetry" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" />
+    <PackageReference Include="Serilog.AspNetCore"/>
+    <PackageReference Include="Serilog.Sinks.Async"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />
+    <PackageReference Include="Volo.Abp.Autofac"/>
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog"/>
+    <PackageReference Include="Volo.Abp.Swashbuckle"/>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\StoreSample.Application\StoreSample.Application.csproj"/>
+    <ProjectReference Include="..\StoreSample.EntityFrameworkCore\StoreSample.EntityFrameworkCore.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**"/>
+    <Content Remove="Logs\**"/>
+    <EmbeddedResource Remove="Logs\**"/>
+    <None Remove="Logs\**"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>

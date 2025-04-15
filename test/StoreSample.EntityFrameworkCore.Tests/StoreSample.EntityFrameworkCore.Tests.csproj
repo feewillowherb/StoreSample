@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\StoreSample.EntityFrameworkCore\StoreSample.EntityFrameworkCore.csproj"/>
+    <ProjectReference Include="..\StoreSample.TestBase\StoreSample.TestBase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+  </ItemGroup>
+
+</Project>

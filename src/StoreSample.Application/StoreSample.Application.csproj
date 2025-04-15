@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\StoreSample.Domain\StoreSample.Domain.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JWT" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application"/>
+    <PackageReference Include="Volo.Abp.SettingManagement.Application"/>
+    <PackageReference Include="Volo.Abp.Account.Application"/>
+    <PackageReference Include="Volo.Abp.Identity.Application"/>
+  </ItemGroup>
+
+</Project>

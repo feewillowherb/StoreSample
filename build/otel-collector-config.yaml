@@ -1,0 +1,55 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    const_labels:
+      label1: value1
+#  otlphttp/openobserve:
+#    endpoint: http://store-sample-ob:5080/api/default
+#    headers:
+#      Authorization: "Basic cm9vdDpDb21wbGV4cGFzcyMxMjM="
+#      stream-name: default
+#    tls:
+#      insecure: true
+  otlp/openobserve:
+    endpoint: store-sample-ob:5081
+    headers:
+      # echo -n 'root@example.com:Complexpass#123' | base64
+      Authorization: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
+      organization: default
+      stream-name: default
+    tls:
+      insecure: true
+  debug:
+    verbosity: detailed
+processors:
+  batch:
+extensions:
+  health_check:
+#  pprof:
+#    endpoint: :1888
+#  zpages:
+#    endpoint: :55679
+
+service:
+  extensions: [ health_check ]
+  pipelines:
+    traces:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ otlp/openobserve,debug ]
+    metrics:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ otlp/openobserve,debug ]
+    logs:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ otlp/openobserve,debug ]
